@@ -1,75 +1,118 @@
 let numbers = document.querySelector('#numbers')
 
-let h3Element = document.createElement('h3')
-h3Element.textContent = 5
-let button1 = document.createElement('button')
-button1.textContent = '+'
+let h3Element = creatElemt('number', 'h3', '5')
+numbers.append(h3Element)
 
-let button2 = document.createElement('button')
-button2.textContent = '-'
+let buttonPlus = creatElemt('button-plus', 'button', '+')
+numbers.append(buttonPlus)
 
-let button3 = document.createElement('button')
-button3.textContent = 'reset'
+let buttonPlus2 = creatElemt('button-plus2', 'button', '++')
+numbers.append(buttonPlus2)
 
-let button4 = document.createElement('button')
-button4.textContent = '++'
+let buttonPlus5 = creatElemt('button-plus5', 'button', '+5')
+numbers.append(buttonPlus5)
 
-let button5 = document.createElement('button')
-button5.textContent = '--'
+let buttonMinus = creatElemt('button-minus', 'button', '-')
+numbers.append(buttonMinus)
 
-numbers.append(h3Element, button1,  button2, button3, button4, button5 )
+let buttonMinus2 = creatElemt('button-minus2', 'button', '--')
+numbers.append(buttonMinus2)
+
+let buttonMinus5 = creatElemt('button-minus5', 'button', '-5')
+numbers.append(buttonMinus5)
+
+let buttonReset = creatElemt('button-reset', 'button', 'reset')
+numbers.append(buttonReset)
+
+function creatElemt(className, type='button', content = '', id ='') {
+    let element = document.createElement(type)
+    element.classList.add(className)
+    element.textContent = content
+    element.id = id
+    return element
+
+}
 
 let count = 5
 
-button1.addEventListener('click', skaiciusPlius)
+buttonPlus.addEventListener('click', skaiciusPlius)
     
     function skaiciusPlius(){
         count++
         h3Element.textContent = count
-
-        if (count >= 5){
-            h3Element.style.color = 'green'
-        }
-        if(count > 9){
-            button1.setAttribute('disabled', true)
-        } else {
-            button2.disabled = false
-        }
+        disable()
     }
-button2.addEventListener('click', skaiciusMinus)
+buttonMinus.addEventListener('click', skaiciusMinus)
 
 function skaiciusMinus(){
     count--
     h3Element.textContent = count
-
-    if (count < 5){
-        h3Element.style.color = 'red'
-    } 
-    if(count <2){
-        button2.setAttribute('disabled', true)
-    } else {
-        button1.disabled = false
-    }
+    disable()
 }
- button3.addEventListener('click', () => {
-    h3Element.textContent = '5'
-    h3Element.style.color = 'black'
 
-  })
-button4.addEventListener('click', plius2 )
+buttonPlus2.addEventListener('click', plius2 )
  function plius2 (){
     count+=2
     h3Element.textContent = count
+   disable()
  }
-
- button5.addEventListener('click', minus2 )
- function minus2 (){
+buttonMinus2.addEventListener('click', minus2)
+ function minus2(){
     count-=2
     h3Element.textContent = count
+   disable()
+}
+
+buttonPlus5.addEventListener('click', plius5 )
+ function plius5 (){
+    count+=5
+    h3Element.textContent = count
+   disable()
  }
- 
- 
+buttonMinus5.addEventListener('click', minus5)
+ function minus5(){
+    count-=5
+    h3Element.textContent = count
+    disable()
+}
+function disable(){
+
+    if (count >= 5){
+        h3Element.style.color = 'green'
+    }
+    if (count < 5){
+        h3Element.style.color = 'red'
+    } 
+    if(count >= 9){
+        buttonPlus.setAttribute('disabled', true)
+        buttonPlus2.setAttribute('disabled', true)
+        buttonPlus5.setAttribute('disabled', true)    
+    } else { if(count <2){
+        buttonMinus.setAttribute('disabled', true)
+        buttonMinus2.setAttribute('disabled', true)
+        buttonMinus5.setAttribute('disabled', true)
+    } else {
+        buttonPlus.disabled = false
+        buttonPlus2.disabled = false
+        buttonPlus5.disabled = false
+        buttonMinus.disabled = false
+        buttonMinus2.disabled = false
+        buttonMinus5.disabled = false
+       
+    }
+}
     
+}
+buttonReset.addEventListener('click', () => {
+    h3Element.textContent = '5'
+    h3Element.style.color = 'black'
+    count = 5
+    disable()
+ }
+
+)
+
+
 // Užduotis:
 // 1. Sukurti HTML elementą, kurio id „numbers"
 // 2. JavaScript pagalba šio elemento viduje sukurti: h3 elementą ir du mygtukų elementus
@@ -89,3 +132,7 @@ button4.addEventListener('click', plius2 )
 // 11. Sukurti du naujus mygtukus, kurie:
 // 11.1. Prideda dvejetą prie esamos h3 elemento reikšmės.
 // 11.2. Atima dvejetą iš esamos h3 elemento reikšmės
+
+// 12. Sukurti du naujus mygtukus, kurie:
+// 12.1. Prideda 5 prie esamos h3 elemento reikšmės.
+// 12.2. Atima 5 iš esamos h3 elemento reikšmės.
